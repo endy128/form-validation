@@ -9,6 +9,7 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   validateInputs();
+  checkIfFormReadyToSend();
 });
 
 const inputs = Array.from(document.querySelectorAll("input"));
@@ -38,6 +39,10 @@ const setSuccess = (element) => {
   inputControl.classList.remove("error");
 };
 
+const getSuccess = (element) => {
+  const inputControl = element.parentElement;
+  return inputControl.classList.contains("success");
+};
 const isValidEmail = (email) => {
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
@@ -92,6 +97,7 @@ const validatePassword = () => {
 };
 
 const validatePassword2 = () => {
+  const passwordValue = password.value.trim();
   const password2Value = password2.value.trim();
   if (password2Value === "") {
     setError(password2, "Please confirm your password");
@@ -108,4 +114,15 @@ const validateInputs = () => {
   validatePostcode();
   validatePassword();
   validatePassword2();
+};
+
+const checkIfFormReadyToSend = () => {
+  if (getSuccess(email)
+    && getSuccess(country)
+    && getSuccess(postcode)
+    && getSuccess(password)
+    && getSuccess(password2)) {
+    console.log("HIGH FIVE");
+    alert("High Five");
+  }
 };
