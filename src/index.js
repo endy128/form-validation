@@ -13,7 +13,6 @@ form.addEventListener("submit", (e) => {
 
 const inputs = Array.from(document.querySelectorAll("input"));
 inputs.forEach((input) => input.addEventListener("change", (e) => {
-  console.log(e.target.id);
   if (e.target.id === "email") validateEmail();
   if (e.target.id === "country") validateCountry();
   if (e.target.id === "postcode") validatePostcode();
